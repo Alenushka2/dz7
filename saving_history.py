@@ -5,13 +5,7 @@ FILE_NAME = 'saving_the_history.txt' #создаёт файл для сохра�
 # списки пусты или содержат последние сохранённые значениения
 history = 0
 historys = []
-# при открытии программы последнее сохранённое значение записывается в список
 
-if os.path.exists(FILE_NAME):
-    with open(FILE_NAME, 'r') as f:
-        history = json.load(f)
-        for history in f:
-           historys.append (historys.replace('\n', ''))
 amount = 0
 def buy (amount):
     cost = int(input('Enter purchase cost'))
@@ -39,6 +33,12 @@ while True:
             #amount = json.load(f)
     elif choice == '3':
             print(history)
+            if os.path.exists(FILE_NAME):
+                # при открытии программы последнее сохранённое значение записывается в список
+                with open(FILE_NAME, 'r') as f:
+                    history = json.load(f)
+                    for history in f:
+                        historys.append(historys.replace('\n', ''))
             with open(FILE_NAME, 'w') as f:
                # for history in history:
                     json.dump(history, f)
@@ -47,3 +47,4 @@ while True:
      break
     else:
         print('Invalid menu item')
+
